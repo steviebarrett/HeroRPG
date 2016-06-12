@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+	<title>Hero RPG</title>
+
+    <script src="js/LAB.min.js"></script>
+    <script>
+        $LAB.setOptions({CacheBust:true})
+                .script('js/geom/Vector2.js').wait()
+                .script('js/Character.js').wait()
+                .script('js/input/Keyboard.js').wait()
+                .script('js/input/Mouse.js').wait()
+                .script('js/Canvas2D.js').wait()
+                .script('js/system/Keys.js').wait()
+                .script('js/Game.js').wait()
+                .script('js/HeroGame.js').wait()
+                .script('js/Hero.js').wait()
+                .script('js/Enemy.js').wait()
+                .script('js/HeroGameWorld.js').wait(function () {
+                    Game.start("myCanvas", 800, 480);
+        });
+    </script>
+
+<body>
+	<div id="gameArea">
+		<canvas id="myCanvas" width="800" height="480"></canvas>
+	</div>
+
+    <!--script src='js/input/Keyboard.js'></script>
+    <script src='js/input/Mouse.js'></script>
+    <script src='js/Canvas2D.js'></script>
+    <script src='js/system/Keys.js'></script>
+    <script src='js/Game.js'></script>
+    <script src='js/HeroGame.js'></script>
+    <script src='js/Hero.js'></script>
+    <script src='js/Enemy.js'></script>
+    <script src='js/HeroGameWorld.js'></script>
+
+    <script>Game.start("myCanvas", 800, 480);</script-->
+</body>
+
+</html>
+
+
