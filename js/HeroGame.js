@@ -17,7 +17,7 @@ Game.initialize = function () {
 
 	console.log("Creating game world");
 	//hero.initialize();
-	hero = new Hero(sprites.hero);
+	hero = new Hero(sprites.hero, new Vector2(72, 405));
 	enemy.initialize();
 	Game.gameWorld = heroGameWorld;
 };

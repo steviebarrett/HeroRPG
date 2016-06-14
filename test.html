@@ -5,10 +5,14 @@
 <head>
 	<title>Hero RPG</title>
 
+    <meta charset="UTF-8">
+
     <script src="js/LAB.min.js"></script>
     <script>
         $LAB.setOptions({CacheBust:true})
                 .script('js/geom/Vector2.js').wait()
+                .script('js/GameObject.js').wait()
+                .script('js/ActiveGameObject.js').wait()
                 .script('js/Character.js').wait()
                 .script('js/input/Keyboard.js').wait()
                 .script('js/input/Mouse.js').wait()

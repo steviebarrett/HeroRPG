@@ -1,22 +1,14 @@
 "use strict";
 
-function Hero(sprite) {
-	Character.call(this, sprite);
-	this.position = new Vector2(72, 405);
+function Hero(sprite, position) {
+	Character.call(this, sprite, position);
 	this.origin = new Vector2(34, 34);
 }
 
 Hero.prototype = Object.create(Character.prototype);
 
-/*
-hero.initialize = function() {
-    hero.position = { x : 72, y : 405 };
-    hero.origin = { x : 34, y : 34 };
-    hero.rotation = 0;
-};
-*/
-
 Hero.prototype.handleInput = function (delta) {
+
 	var newX = this.position.x;
 	var newY = this.position.y;
 	switch (Keyboard.keyDown) {
@@ -38,7 +30,8 @@ Hero.prototype.handleInput = function (delta) {
 		newX = this.position.x;
 		newY = this.position.y;
 	}
-	this.position = {x : newX, y : newY};
+	this.position = new Vector2(newX, newY);
+
 };
 
 /*
