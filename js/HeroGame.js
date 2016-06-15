@@ -1,7 +1,6 @@
 "use strict";
 
 var sprites = {};
-var hero; //TODO this should not be global
 
 Game.loadAssets = function () {
 	var loadSprite = function (sprite) {
@@ -16,8 +15,8 @@ Game.loadAssets = function () {
 Game.initialize = function () {
 
 	console.log("Creating game world");
-	//hero.initialize();
-	hero = new Hero(sprites.hero, new Vector2(72, 405));
-	enemy.initialize();
-	Game.gameWorld = heroGameWorld;
+
+	//create the game world
+	Game.gameWorld = new HeroGameWorld();
 };
+

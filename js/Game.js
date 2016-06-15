@@ -1,59 +1,75 @@
 "use strict";
 
-window.requestAnimationFrame =  window.requestAnimationFrame ||
-	window.webkitRequestAnimationFrame ||
-	window.mozRequestAnimationFrame ||
-	window.oRequestAnimationFrame ||
-	window.msRequestAnimationFrame ||
-	function (callback) {
-		window.setTimeout(callback, 1000 / 60);
-	};
+var requestAnimationFrame = (function () {
+	return window.requestAnimationFrame ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame ||
+			window.oRequestAnimationFrame ||
+			window.msRequestAnimationFrame ||
+			function (callback) {
+				window.setTimeout(callback, 1000 / 60);
+			};
+})();
 
-var Game = {
-	spritesStillLoading : 0,
-	gameWorld : undefined
+function Game_Singleton() {
+	console.log("Creating game");
+	this._totalTime = 0;
+	this.size = null;
+	this._spritesStillLoading = 0;
+	this.gameWorld = null;
 }
 
-Game.start = function (canvasName, x, y) {
+Object.defineProperty(Game_Singleton.prototype, "totalTime",
+	{
+		get: function () {
+			return this._totalTime;
+		}
+	});
+
+Game_Singleton.prototype.start = function (canvasName, x, y) {
+	this.size = new Vector2(x,y);
+
 	Canvas2D.initialize(canvasName);
-	Game.size = { x : x, y : y };
-	Keyboard.initialize();
-	Mouse.initialize();
-	Game.loadAssets();
-	Game.assetLoadingLoop();
+	this.loadAssets();
+	this.assetLoadingLoop();
+	console.log("'");
 };
 
-Game.loadAssets = function () {
+Game_Singleton.prototype.initialize = function () {
 };
 
-Game.loadSprite = function (imageName) {
-	console.log("Loading sprite: " + imageName);
+Game_Singleton.prototype.loadAssets = function () {
+};
+
+Game_Singleton.prototype.loadSprite = function (imageName) {
+	console.log("loading sprite: " + imageName);
 	var image = new Image();
 	image.src = imageName;
-	this.spritesStillLoading += 1;
+	this._spritesStillLoading += 1;
 	image.onload = function () {
-		Game.spritesStillLoading -= 1;
+		Game._spritesStillLoading -=1;
 	};
 	return image;
 };
 
-Game.assetLoadingLoop = function () {
-	if (!Game.spritesStillLoading > 0)
-		window.requestAnimationFrame(Game.assetLoadingLoop);
-	else {
+Game_Singleton.prototype.assetLoadingLoop = function () {
+	if (!this._spritesStillLoading > 0) {
+		requestAnimationFrame(Game.assetLoadingLoop);
+	} else {
 		Game.initialize();
-		window.requestAnimationFrame(Game.mainLoop);
+		requestAnimationFrame(Game.mainLoop);
 	}
 };
 
-Game.mainLoop = function () {
+Game_Singleton.prototype.mainLoop = function () {
 	var delta = 1 / 60;
-
 	Game.gameWorld.handleInput(delta);
 	Game.gameWorld.update(delta);
 	Canvas2D.clear();
 	Game.gameWorld.draw();
+
 	Mouse.reset();
 	requestAnimationFrame(Game.mainLoop);
 };
 
+var Game = new Game_Singleton();

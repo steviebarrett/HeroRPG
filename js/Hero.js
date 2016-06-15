@@ -2,7 +2,6 @@
 
 function Hero(sprite, position) {
 	Character.call(this, sprite, position);
-	this.origin = new Vector2(34, 34);
 }
 
 Hero.prototype = Object.create(Character.prototype);
@@ -25,7 +24,7 @@ Hero.prototype.handleInput = function (delta) {
 			newX += 10;
 			break;
 	}
-	if (heroGameWorld.isOutsideWorld({x:newX, y:newY})) {
+	if (Game.gameWorld.isOutsideWorld({x:newX, y:newY})) {
 		console.log("boundary breached");
 		newX = this.position.x;
 		newY = this.position.y;
@@ -33,11 +32,3 @@ Hero.prototype.handleInput = function (delta) {
 	this.position = new Vector2(newX, newY);
 
 };
-
-/*
-hero.update = function (delta) {};
-
-hero.draw = function () {
-    Canvas2D.drawImage(sprites.hero, hero.position, hero.rotation, hero.origin);
-};
-*/

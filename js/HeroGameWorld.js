@@ -1,28 +1,29 @@
 "use strict";
 
-var heroGameWorld = {
+function HeroGameWorld() {
+	this.hero = new Hero(sprites.hero, new Vector2(72, 405));
+	this.enemy = new Enemy(sprites.enemy, new Vector2(200, 40));
+}
+
+HeroGameWorld.prototype.handleInput = function (delta) {
+	this.hero.handleInput(delta);
 };
 
-heroGameWorld.handleInput = function (delta) {
-	hero.handleInput(delta);
+HeroGameWorld.prototype.update = function (delta) {
+	this.hero.update(delta);
 };
 
-heroGameWorld.update = function (delta) {
-	hero.update(delta);
-	enemy.update(delta);
+HeroGameWorld.prototype.draw = function () {
+	Canvas2D.drawImage(sprites.background);
+
+	this.hero.draw();
+	this.enemy.draw();
 };
 
-heroGameWorld.draw = function () {
-	Canvas2D.drawImage(sprites.background, { x : 0, y : 0 }, 0, { x : 0, y : 0 });
-	hero.draw(); 
-	enemy.draw();
+HeroGameWorld.prototype.reset = function () {
+	this.hero.reset();
 };
 
-heroGameWorld.reset = function () {
-	hero.reset();
-	enemy.reset();
-};
-
-heroGameWorld.isOutsideWorld = function (position) {
-	return position.x < 0 || position.x > Game.size.x || position.y > Game.size.y || position.y < 0;
+HeroGameWorld.prototype.isOutsideWorld = function (position) {
+	return position.x < 0 || position.x > Game.size.x || position.y > Game.size.y;
 };
