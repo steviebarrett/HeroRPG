@@ -6,7 +6,7 @@
 	<title>Hero RPG</title>
 
     <meta charset="UTF-8">
-
+    <link rel="stylesheet" href="style.css">
     <script src="js/LAB.min.js"></script>
     <script>
         $LAB.setOptions({CacheBust:true})
@@ -15,6 +15,7 @@
                 .script('js/ActiveGameObject.js').wait()
                 .script('js/Character.js').wait()
                 .script('js/Hero.js').wait()
+                .script('js/input/ButtonState.js').wait()
                 .script('js/input/Keyboard.js').wait()
                 .script('js/input/Mouse.js').wait()
                 .script('js/Canvas2D.js').wait()
@@ -25,7 +26,7 @@
                 .script('js/HeroGameWorld.js').wait()
                 .script('js/HeroGame.js').wait(function () {
 
-            Game.start("myCanvas", 800, 480);
+            Game.start("gameArea", "myCanvas", 800, 480);
         });
     </script>
 

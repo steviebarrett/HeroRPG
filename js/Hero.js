@@ -12,6 +12,7 @@ Hero.prototype.handleInput = function (delta) {
 	var newY = this.position.y;
 	switch (Keyboard.keyDown) {
 		case Keys.up:
+			console.log("up");
 			newY -= 10;
 			break;
 		case Keys.down:

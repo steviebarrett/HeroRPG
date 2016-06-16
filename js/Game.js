@@ -26,10 +26,10 @@ Object.defineProperty(Game_Singleton.prototype, "totalTime",
 		}
 	});
 
-Game_Singleton.prototype.start = function (canvasName, x, y) {
+Game_Singleton.prototype.start = function (divName, canvasName, x, y) {
 	this.size = new Vector2(x,y);
 
-	Canvas2D.initialize(canvasName);
+	Canvas2D.initialize(divName, canvasName);
 	this.loadAssets();
 	this.assetLoadingLoop();
 	console.log("'");
