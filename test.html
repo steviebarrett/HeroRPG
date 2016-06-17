@@ -6,11 +6,13 @@
 	<title>Hero RPG</title>
 
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial=scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="style.css">
     <script src="js/LAB.min.js"></script>
     <script>
         $LAB.setOptions({CacheBust:true})
                 .script('js/geom/Vector2.js').wait()
+                .script('js/geom/Rectangle.js').wait()
                 .script('js/GameObject.js').wait()
                 .script('js/ActiveGameObject.js').wait()
                 .script('js/Character.js').wait()
@@ -18,6 +20,7 @@
                 .script('js/input/ButtonState.js').wait()
                 .script('js/input/Keyboard.js').wait()
                 .script('js/input/Mouse.js').wait()
+                .script('js/input/Touch.js').wait()
                 .script('js/Canvas2D.js').wait()
                 .script('js/system/Keys.js').wait()
                 .script('js/Game.js').wait()
