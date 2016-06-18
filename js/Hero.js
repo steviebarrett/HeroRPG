@@ -26,6 +26,7 @@ Hero.prototype.handleInput = function (delta) {
 			newY = Touch.position.y;
 		} else if (Touch.containsTouchPress(rect)) {
 			//use this to detect if press inside the rectangle
+			alert("hello");
 		}
 	}
 	
