@@ -21,12 +21,14 @@ Hero.prototype.handleInput = function (delta) {
 
 	if (Touch.isTouchDevice) {
 		var rect = this.heroSelectRectangle;
-		if (Touch.touching && !Touch.containsTouch(rect)) {
-			newX = Touch.position.x;
-			newY = Touch.position.y;
-		} else if (Touch.containsTouchPress(rect)) {
-			//use this to detect if press inside the rectangle
-			alert("hello");
+		if (Touch.containsTouchPress(rect)) {
+			//use this to detect if press inside the hero
+		} else if (Touch.isTouching && !Touch.containsTouch(rect)) {
+			//touched outside the hero position
+			var pos = Touch.getPosition(0);
+			newX = pos.x;
+			newY = pos.y;
+			//use this to move the hero to newly touched position
 		}
 	}
 	
