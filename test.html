@@ -13,23 +13,26 @@
         $LAB.setOptions({CacheBust:true})
                 .script('js/geom/Vector2.js').wait()
                 .script('js/geom/Rectangle.js').wait()
-                .script('js/GameObject.js').wait()
-                .script('js/ActiveGameObject.js').wait()
-                .script('js/Character.js').wait()
-                .script('js/Hero.js').wait()
+                .script('js/Canvas2D.js').wait()
+
+                .script('js/system/Keys.js').wait()
+
                 .script('js/input/ButtonState.js').wait()
                 .script('js/input/Keyboard.js').wait()
                 .script('js/input/Mouse.js').wait()
                 .script('js/input/Touch.js').wait()
-                .script('js/Canvas2D.js').wait()
-                .script('js/system/Keys.js').wait()
+
+                .script('js/GameObject.js').wait()
+                .script('js/ActiveGameObject.js').wait()
+                .script('js/Character.js').wait()
+                .script('js/Hero.js').wait()
+                .script('js/Enemy.js').wait()
+
                 .script('js/Game.js').wait()
 
-                .script('js/Enemy.js').wait()
                 .script('js/HeroGameWorld.js').wait()
                 .script('js/HeroGame.js').wait(function () {
-
-            Game.start("gameArea", "myCanvas", 800, 480);
+                    Game.start("gameArea", "myCanvas", 800, 480);
         });
     </script>
 

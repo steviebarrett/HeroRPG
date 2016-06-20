@@ -6,7 +6,7 @@ function HeroGameWorld() {
 
 	//the grid array
 	this.rows = 5;
-	this.cold = 10;
+	this.cols = 10;
 	this.grid = new Array(this.rows * this.cols);
 	for (var i = 0;i < this.rows * this.cols; i++) {
 		this.grid[i] = sprites.hero;    //fill the grid with heroes just now
@@ -34,8 +34,16 @@ HeroGameWorld.prototype.update = function (delta) {
 HeroGameWorld.prototype.draw = function () {
 	Canvas2D.drawImage(sprites.background);
 
-	this.hero.draw();
-	this.enemy.draw();
+	//this.hero.draw();
+	//this.enemy.draw();
+
+	for (var row = 0; row < this.rows; row++) {
+		for (var col = 0; col < this.cols; col++) {
+			var position = new Vector2(85 + col * 85, 150 + row * 85);
+			Canvas2D.drawImage(this.hero.sprite, position);     //temp for *test*
+			//Canvas2D.drawImage(this.getGridValue(col, row), position);
+		}
+	}
 };
 
 HeroGameWorld.prototype.reset = function () {

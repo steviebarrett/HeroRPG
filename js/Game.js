@@ -14,7 +14,7 @@ var requestAnimationFrame = (function () {
 function Game_Singleton() {
 	console.log("Creating game");
 	this._totalTime = 0;
-	this.size = null;
+	this._size = null;
 	this._spritesStillLoading = 0;
 	this.gameWorld = null;
 }
@@ -26,9 +26,22 @@ Object.defineProperty(Game_Singleton.prototype, "totalTime",
 		}
 	});
 
-Game_Singleton.prototype.start = function (divName, canvasName, x, y) {
-	this.size = new Vector2(x,y);
+Object.defineProperty(Game_Singleton.prototype, "size",
+	{
+		get: function () {
+			return this._size;
+		}
+	});
 
+Object.defineProperty(Game_Singleton.prototype, "screenRect",
+	{
+		get: function () {
+			return new Rectangle(0, 0, this._size.x, this._size.y);
+		}
+	});
+
+Game_Singleton.prototype.start = function (divName, canvasName, x, y) {
+	this._size = new Vector2(x,y);
 	Canvas2D.initialize(divName, canvasName);
 	this.loadAssets();
 	this.assetLoadingLoop();
@@ -36,6 +49,7 @@ Game_Singleton.prototype.start = function (divName, canvasName, x, y) {
 };
 
 Game_Singleton.prototype.initialize = function () {
+	alert("init");
 };
 
 Game_Singleton.prototype.loadAssets = function () {
@@ -53,9 +67,13 @@ Game_Singleton.prototype.loadSprite = function (imageName) {
 };
 
 Game_Singleton.prototype.assetLoadingLoop = function () {
-	if (!this._spritesStillLoading > 0) {
+	Canvas2D.clear();
+/*	Canvas2D.drawText(Math.round((Game._totalSprites - Game._spritesStillLoading) /
+			Game._totalSprites * 100) + "%");
+*/
+	if (Game._spritesStillLoading > 0)
 		requestAnimationFrame(Game.assetLoadingLoop);
-	} else {
+	else {
 		Game.initialize();
 		requestAnimationFrame(Game.mainLoop);
 	}
@@ -67,8 +85,10 @@ Game_Singleton.prototype.mainLoop = function () {
 	Game.gameWorld.update(delta);
 	Canvas2D.clear();
 	Game.gameWorld.draw();
-
+	Keyboard.reset();
 	Mouse.reset();
+	Touch.reset();
+
 	requestAnimationFrame(Game.mainLoop);
 };
 
