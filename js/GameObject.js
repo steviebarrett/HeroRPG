@@ -1,14 +1,15 @@
 "use strict"
 
-function GameObject(sprite, position) {
-	this.sprite = sprite;       //TODO: move sprite out of this object
-	this.position = position;   //a vector object
+function GameObject(layer) {
+	this.layer = typeof layer !== 'undefined'? layer : 0;
+	this.position = Vector2.zero;
 	this.origin = new Vector2(0, 0);    //TODO: work on calculating the origin
 										//& move out of this object
 	this.scale = 1;             //TODO: move out of this object
 	this._visible = true;
 	this.parent = null;
-	this.layer = typeof layer !== 'undefined'? layer : 0;
+
+	this.velocity = Vector2.zero;
 }
 
 Object.defineProperty(GameObject.prototype, "visible",
@@ -46,10 +47,12 @@ Object.defineProperty(GameObject.prototype, "worldPosition",
 		}
 	});
 
-//TODO: move this further down the inheritance chain
-GameObject.prototype.draw = function() {
-	if (!this.visible) {
-		return;
-	}
-	Canvas2D.drawImage(this.sprite, this.position, this.rotation, this.scale, this.origin);
+GameObject.prototype.draw = function () {}
+
+GameObject.prototype.reset = function () {
+	this._visible = true;
+}
+
+GameObject.prototype.update = function (delta) {
+	this.position.addTo(this.velocity.multiply(delta));
 };
