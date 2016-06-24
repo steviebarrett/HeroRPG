@@ -1,8 +1,10 @@
 "use strict";
 
 var sprites = {};
+var ID = {};    //used at the moment to store layers
 
 Game.loadAssets = function () {
+
 	var loadSprite = function (sprite) {
 		return Game.loadSprite("assets/" + sprite);
 	};
@@ -15,8 +17,17 @@ Game.loadAssets = function () {
 Game.initialize = function () {
 
 	console.log("Creating game world");
+	//define game layers
+	ID.layer_background = 1;
+	ID.layer_objects = 20;
 
 	//create the game world
 	Game.gameWorld = new HeroGameWorld();
+
+	//Test only for object handling
+	//var myHero = new Hero(sprites.hero, new Vector2(0,0));
+	//myHero.draw();
+	//
+	//
 };
 

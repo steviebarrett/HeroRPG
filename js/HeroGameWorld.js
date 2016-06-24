@@ -1,6 +1,15 @@
 "use strict";
 
-function HeroGameWorld() {
+function HeroGameWorld(layer) {
+
+	GameObjectList.call(this, layer);
+	this.add(new SpriteGameObject(sprites.background, ID.layer_background));
+
+	console.log(this);
+
+	//TODO: revisit this breakpoint
+	return;
+	
 	this.hero = new Hero(sprites.hero, new Vector2(72, 405));
 	this.enemy = new Enemy(sprites.enemy, new Vector2(200, 40));
 
@@ -53,3 +62,5 @@ HeroGameWorld.prototype.reset = function () {
 HeroGameWorld.prototype.isOutsideWorld = function (position) {
 	return position.x < 0 || position.x > Game.size.x || position.y > Game.size.y;
 };
+
+HeroGameWorld.prototype = Object.create(GameObjectList.prototype);

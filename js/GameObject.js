@@ -3,7 +3,7 @@
 function GameObject(layer) {
 	this.layer = typeof layer !== 'undefined'? layer : 0;
 	this.position = Vector2.zero;
-	this.origin = new Vector2(0, 0);    //TODO: work on calculating the origin
+	this.origin = Vector2.zero;    //TODO: work on calculating the origin
 										//& move out of this object
 	this.scale = 1;             //TODO: move out of this object
 	this._visible = true;
