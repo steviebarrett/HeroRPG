@@ -5,23 +5,29 @@ function HeroGameWorld(layer) {
 	GameObjectList.call(this, layer);
 	this.add(new SpriteGameObject(sprites.background, ID.layer_background));
 
-	console.log(this);
+//	this.add(new SpriteGameObject(sprites.hero, ID.layer_objects));
 
-	//TODO: revisit this breakpoint
-	return;
-	
-	this.hero = new Hero(sprites.hero, new Vector2(72, 405));
-	this.enemy = new Enemy(sprites.enemy, new Vector2(200, 40));
+//	this.add(new SpriteGameObject(sprites.enemy, ID.layer_objects));
+
+//	this.add(new SpriteGameObject(sprites.gridSquare, ID.layer_grid));
+//	this.hero = new Hero(sprites.hero, new Vector2(72, 405));
+//	this.enemy = new Enemy(sprites.enemy, new Vector2(200, 40));
 
 	//the grid array
-	this.rows = 5;
-	this.cols = 10;
-	this.grid = new Array(this.rows * this.cols);
-	for (var i = 0;i < this.rows * this.cols; i++) {
-		this.grid[i] = sprites.hero;    //fill the grid with heroes just now
+	var rows = 5, columns = 10;
+	var grid = new GameGrid(rows, columns, ID.layer_grid);
+
+	grid.position = new Vector2(0, 0);
+	grid.cellWidth = 70;
+	grid.cellHeight = 70;
+	this.add(grid);
+
+	for (var i = 0; i < rows * columns; i++) {
+		grid.add(new GridSquare());
 	}
 }
 
+/*
 HeroGameWorld.prototype.setGridValue = function (x, y, value) {
 	var index = y * this.columns + x;
 	this.grid[index] = value;
@@ -62,5 +68,6 @@ HeroGameWorld.prototype.reset = function () {
 HeroGameWorld.prototype.isOutsideWorld = function (position) {
 	return position.x < 0 || position.x > Game.size.x || position.y > Game.size.y;
 };
+*/
 
 HeroGameWorld.prototype = Object.create(GameObjectList.prototype);

@@ -33,6 +33,8 @@
 
                 .script('js/Game.js').wait()
                 .script('js/HeroGameWorld.js').wait()
+                .script('js/gameObjects/GameGrid.js').wait()
+                .script('js/gameObjects/GridSquare.js').wait()
                 .script('js/HeroGame.js').wait(function () {
                     Game.start("gameArea", "myCanvas", 800, 480);
         });

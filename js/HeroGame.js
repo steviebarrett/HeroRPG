@@ -10,6 +10,7 @@ Game.loadAssets = function () {
 	};
 
 	sprites.background = loadSprite("background_sb.png");
+	sprites.gridSquare = loadSprite("gridSquare.png");
 	sprites.hero = loadSprite("hero_sb.png");
 	sprites.enemy = loadSprite("enemy1.png");
 };
@@ -19,6 +20,7 @@ Game.initialize = function () {
 	console.log("Creating game world");
 	//define game layers
 	ID.layer_background = 1;
+	ID.layer_grid = 10;
 	ID.layer_objects = 20;
 
 	//create the game world

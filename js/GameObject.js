@@ -47,12 +47,17 @@ Object.defineProperty(GameObject.prototype, "worldPosition",
 		}
 	});
 
-GameObject.prototype.draw = function () {}
-
-GameObject.prototype.reset = function () {
-	this._visible = true;
-}
+GameObject.prototype.handleInput = function (delta) {
+};
 
 GameObject.prototype.update = function (delta) {
 	this.position.addTo(this.velocity.multiply(delta));
 };
+
+GameObject.prototype.draw = function () {
+};
+
+GameObject.prototype.reset = function () {
+	this._visible = true;
+};
+
