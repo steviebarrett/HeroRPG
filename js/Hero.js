@@ -1,7 +1,7 @@
 "use strict";
 
-function Hero(sprite, position) {
-	Character.call(this, sprite, position);
+function Hero(sprite, grid) {
+	Character.call(this, sprite, grid);
 }
 
 Hero.prototype = Object.create(Character.prototype);
@@ -13,6 +13,7 @@ Object.defineProperty(Hero.prototype, "heroSelectRectangle",
 			sprites.hero.height, sprites.hero.height);
 		}
 	});
+
 
 Hero.prototype.handleInput = function (delta) {
 
@@ -46,11 +47,6 @@ Hero.prototype.handleInput = function (delta) {
 		newX += 10;
 	}
 
-	if (Game.gameWorld.isOutsideWorld({x:newX, y:newY})) {
-		console.log("boundary breached");
-		newX = this.position.x;
-		newY = this.position.y;
-	}
 	this.position = new Vector2(newX, newY);
 
 };

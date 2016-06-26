@@ -14,7 +14,7 @@ function HeroGameWorld(layer) {
 //	this.enemy = new Enemy(sprites.enemy, new Vector2(200, 40));
 
 	//the grid array
-	var rows = 5, columns = 10;
+	var rows = 7, columns = 11;
 	var grid = new GameGrid(rows, columns, ID.layer_grid);
 
 	grid.position = new Vector2(0, 0);
@@ -23,8 +23,15 @@ function HeroGameWorld(layer) {
 	this.add(grid);
 
 	for (var i = 0; i < rows * columns; i++) {
-		grid.add(new GridSquare());
+		grid.add(new GridSquare(ID.layer_grid));
 	}
+
+	this.hero = new Hero(sprites.hero);
+	grid.addAt(this.hero, 3, 3);
+
+	this.enemy = new Enemy(sprites.enemy);
+	this.enemy.scale = 0.75;
+	grid.addAt(this.enemy, 1, 1);
 }
 
 /*
