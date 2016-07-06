@@ -32,5 +32,5 @@ Object.defineProperty(ActiveGameObject.prototype, "height",
 ActiveGameObject.prototype.draw = function () {
 	if (!this.visible)
 		return;
-	Canvas2D.drawImage(this.sprite, this.worldPosition, 0, 1, this.origin);
+  	Canvas2D.drawImage(this.sprite, this.worldPosition, 0, 1, this.origin);
 };

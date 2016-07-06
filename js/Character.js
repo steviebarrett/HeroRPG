@@ -1,7 +1,7 @@
 "use strict";
 
-function Character(sprite, position) {
-	ActiveGameObject.call(this, sprite, position);
+function Character(sprite) {
+	ActiveGameObject.call(this, sprite);
 	this.origin = Vector2.zero;
 	this.rotation = 0;
 	

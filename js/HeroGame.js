@@ -18,14 +18,17 @@ Game.loadAssets = function () {
 Game.initialize = function () {
 
 	console.log("Creating game world");
+
 	//define game layers
 	ID.layer_background = 1;
 	ID.layer_grid = 10;
 	ID.layer_objects = 20;
 
+	//define the object IDs
+	ID.grid = 1;
+	
 	//create the game world
-	Game.gameWorld = new HeroGameWorld();
-
+	Game.gameWorld = new HeroGameWorld(sprites.gridSquare);
 	//Test only for object handling
 	//var myHero = new Hero(sprites.hero, new Vector2(0,0));
 	//myHero.draw();

@@ -12,7 +12,6 @@ var requestAnimationFrame = (function () {
 })();
 
 function Game_Singleton() {
-	console.log("Creating game");
 	this._totalTime = 0;
 	this._size = null;
 	this._spritesStillLoading = 0;
@@ -45,7 +44,6 @@ Game_Singleton.prototype.start = function (divName, canvasName, x, y) {
 	Canvas2D.initialize(divName, canvasName);
 	this.loadAssets();
 	this.assetLoadingLoop();
-	console.log("'");
 };
 
 Game_Singleton.prototype.initialize = function () {

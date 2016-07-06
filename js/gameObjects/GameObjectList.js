@@ -2,8 +2,8 @@
 
 GameObjectList.prototype = Object.create(GameObject.prototype);
 
-function GameObjectList(layer) {
-	GameObject.call(this, layer);
+function GameObjectList(layer, id) {
+	GameObject.call(this, layer, id);
 
 	this._gameObjects = [];
 }
@@ -13,6 +13,21 @@ Object.defineProperty(GameObjectList.prototype, "length", {
 		return this._gameObjects.length;
 	}
 });
+
+//find a specific object in the list
+GameObjectList.prototype.find = function (id) {
+	for (var i = 0; i < this._gameObjects.length; i++) {
+		if (this._gameObjects[i].id === id) {
+			return this._gameObjects[i];
+		}
+		if (this._gameObjects[i] instanceof GameObjectList) {
+			var obj = this._gameObjects[i].find(id);
+			if (obj !== null) {
+				return obj;
+			}
+		}
+	}
+};
 
 GameObjectList.prototype.add = function (gameobject) {
 	this._gameObjects.push(gameobject);

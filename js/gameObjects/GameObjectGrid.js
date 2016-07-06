@@ -1,8 +1,8 @@
 "use strict"
 
-function GameObjectGrid(rows, columns, layer) {
-	GameObjectList.call(this, layer);
-	
+function GameObjectGrid(rows, columns, layer, id) {
+	GameObjectList.call(this, layer, id);
+
 	this.cellWidth = 0;
 	this.cellHeight = 0;
 	this._rows = rows;
@@ -45,13 +45,28 @@ GameObjectGrid.prototype.at = function (col, row) {
 		return this._gameObjects[index];
 };
 
+/*
+ Cut down version, Cf original in JewelJam4
+ */
 GameObjectGrid.prototype.getAnchorPosition = function (gameobject) {
+	var gridPos = this.getCell(gameobject);
+	return new Vector2(gridPos.x * this.cellWidth, gridPos.y*this.cellHeight);
+};
+
+
+/*
+ User added functions
+ */
+GameObjectGrid.prototype.getCell = function (gameobject) {
 	var l = this._gameObjects.length;
 	for (var i = 0; i < l; ++i)
 		if (this._gameObjects[i] === gameobject) {
 			var row = Math.floor(i / this.columns);
 			var col = i % this.columns;
-			return new Vector2(col * this.cellWidth, row * this.cellHeight);
+			return new Vector2(col, row);
 		}
-	return Vector2.zero;
+};
+
+GameObjectGrid.prototype.getCellPos = function (col, row) {
+	return this._gameObjects[row * this._columns + col].worldPosition;
 };

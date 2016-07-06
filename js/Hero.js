@@ -1,7 +1,7 @@
 "use strict";
 
-function Hero(sprite, grid) {
-	Character.call(this, sprite, grid);
+function Hero(sprite) {
+	Character.call(this, sprite);
 }
 
 Hero.prototype = Object.create(Character.prototype);
@@ -17,8 +17,12 @@ Object.defineProperty(Hero.prototype, "heroSelectRectangle",
 
 Hero.prototype.handleInput = function (delta) {
 
-	var newX = this.position.x;
-	var newY = this.position.y;
+	var grid = Game.gameWorld.find(ID.grid);
+	var cell = grid.getCell(this);
+
+	var newPos = new Vector2(this.position.x, this.position.y);
+	//var newX = this.position.x;
+	//var newY = this.position.y;
 
 	if (Touch.isTouchDevice) {
 		var rect = this.heroSelectRectangle;
@@ -27,26 +31,25 @@ Hero.prototype.handleInput = function (delta) {
 		} else if (Touch.isTouching && !Touch.containsTouch(rect)) {
 			//touched outside the hero position
 			var pos = Touch.getPosition(0);
-			newX = pos.x;
-			newY = pos.y;
+	//		newX = pos.x;
+	//		newY = pos.y;
 			//use this to move the hero to newly touched position
 		}
 	}
-	
+
 	//TODO: Refactor keyboard handling into better code
 	if (Keyboard.down(Keys.up)) {
-		newY -= 10;
+		newPos = grid.getCellPos(cell.x, cell.y-1);
+		//var newPos = grid.moveTo(this, cell.x, cell.y-1);
+		//newY = newPos.y;
 	}
 	if (Keyboard.down(Keys.down)) {
-		newY += 10;
-	}
+        newPos = grid.getCellPos(cell.x, cell.y+1);	}
 	if (Keyboard.down(Keys.left)) {
-		newX -= 10;
-	}
+		newPos = grid.getCellPos(cell.x-1, cell.y);	}
 	if (Keyboard.down(Keys.right)) {
-		newX += 10;
-	}
+		newPos = grid.getCellPos(cell.x+1, cell.y);	}
 
-	this.position = new Vector2(newX, newY);
+	this.position = newPos;
 
 };

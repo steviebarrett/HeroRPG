@@ -1,7 +1,8 @@
 "use strict"
 
-function GameObject(layer) {
+function GameObject(layer, id) {
 	this.layer = typeof layer !== 'undefined'? layer : 0;
+	this.id = typeof id !== 'undefined' ? id : 0;
 	this.position = Vector2.zero;
 	this.origin = Vector2.zero;    //TODO: work on calculating the origin
 										//& move out of this object

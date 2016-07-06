@@ -25,18 +25,23 @@ function HeroGameWorld(layer) {
 	for (var i = 0; i < rows * columns; i++) {
 		grid.add(new GridSquare(ID.layer_grid));
 	}
-
-	this.hero = new Hero(sprites.hero);
+	this.hero = new Hero(sprites.hero);   //change from hard-coding
 	grid.addAt(this.hero, 3, 3);
-
+console.log(this);
 	this.enemy = new Enemy(sprites.enemy);
 	this.enemy.scale = 0.75;
 	grid.addAt(this.enemy, 1, 1);
 }
 
+Object.defineProperty(HeroGameWorld.prototype, "gameWorld", {
+	get: function () {
+		return this.gameWorld;
+	}
+});
+
 /*
 HeroGameWorld.prototype.setGridValue = function (x, y, value) {
-	var index = y * this.columns + x;
+		var index = y * this.columns + x;
 	this.grid[index] = value;
 };
 
