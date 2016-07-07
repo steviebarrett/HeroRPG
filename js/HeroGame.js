@@ -26,9 +26,9 @@ Game.initialize = function () {
 
 	//define the object IDs
 	ID.grid = 1;
-	
+
 	//create the game world
-	Game.gameWorld = new HeroGameWorld(sprites.gridSquare);
+	Game.gameWorld = new HeroGameWorld();
 	//Test only for object handling
 	//var myHero = new Hero(sprites.hero, new Vector2(0,0));
 	//myHero.draw();

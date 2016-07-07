@@ -1,10 +1,15 @@
 "use strict";
 
-function Hero(sprite) {
-	Character.call(this, sprite);
+function Hero(sprite, layer) {
+	SpriteGameObject.call(this, sprite, layer);
+
+	//temp
+	this.position = new Vector2(210,210);
+	this.col = 3;
+	this.row = 3;
 }
 
-Hero.prototype = Object.create(Character.prototype);
+Hero.prototype = Object.create(SpriteGameObject.prototype);
 
 Object.defineProperty(Hero.prototype, "heroSelectRectangle",
 	{
@@ -16,13 +21,16 @@ Object.defineProperty(Hero.prototype, "heroSelectRectangle",
 
 
 Hero.prototype.handleInput = function (delta) {
-
 	var grid = Game.gameWorld.find(ID.grid);
+/*
 	var cell = grid.getCell(this);
 
-	var newPos = new Vector2(this.position.x, this.position.y);
-	//var newX = this.position.x;
-	//var newY = this.position.y;
+	var currPos = new Vector2(this.position.x, this.position.y);
+	var newCell = null;
+	var newCol = cell.x;
+	var newRow = cell.y;
+*/
+	var newCol, newRow;
 
 	if (Touch.isTouchDevice) {
 		var rect = this.heroSelectRectangle;
@@ -39,17 +47,28 @@ Hero.prototype.handleInput = function (delta) {
 
 	//TODO: Refactor keyboard handling into better code
 	if (Keyboard.down(Keys.up)) {
-		newPos = grid.getCellPos(cell.x, cell.y-1);
-		//var newPos = grid.moveTo(this, cell.x, cell.y-1);
-		//newY = newPos.y;
+		this.row--;
 	}
 	if (Keyboard.down(Keys.down)) {
-        newPos = grid.getCellPos(cell.x, cell.y+1);	}
+		this.row++;
+	}
 	if (Keyboard.down(Keys.left)) {
-		newPos = grid.getCellPos(cell.x-1, cell.y);	}
+		this.col--;
+	}
 	if (Keyboard.down(Keys.right)) {
-		newPos = grid.getCellPos(cell.x+1, cell.y);	}
+		this.col++;
+	}
 
-	this.position = newPos;
+	if (this.col < 0) {
+		this.col = 0;
+	}
+	if (this.row < 0) {
+		this.row = 0;
+	}
+
+//	newCell = new Vector2(newCol, newRow);
+//	grid.moveCellContents(this, cell, newCell);
+	this.position = grid.getCellPos(this.col, this.row);
 
 };
+

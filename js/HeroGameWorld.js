@@ -5,14 +5,6 @@ function HeroGameWorld(layer) {
 	GameObjectList.call(this, layer);
 	this.add(new SpriteGameObject(sprites.background, ID.layer_background));
 
-//	this.add(new SpriteGameObject(sprites.hero, ID.layer_objects));
-
-//	this.add(new SpriteGameObject(sprites.enemy, ID.layer_objects));
-
-//	this.add(new SpriteGameObject(sprites.gridSquare, ID.layer_grid));
-//	this.hero = new Hero(sprites.hero, new Vector2(72, 405));
-//	this.enemy = new Enemy(sprites.enemy, new Vector2(200, 40));
-
 	//the grid array
 	var rows = 7, columns = 11;
 	var grid = new GameGrid(rows, columns, ID.layer_grid);
@@ -25,12 +17,15 @@ function HeroGameWorld(layer) {
 	for (var i = 0; i < rows * columns; i++) {
 		grid.add(new GridSquare(ID.layer_grid));
 	}
-	this.hero = new Hero(sprites.hero);   //change from hard-coding
-	grid.addAt(this.hero, 3, 3);
-console.log(this);
+
+	//our hero
+	var hero = new Hero(sprites.hero, ID.layer_objects);
+	this.add(hero);
+
+/*
 	this.enemy = new Enemy(sprites.enemy);
 	this.enemy.scale = 0.75;
-	grid.addAt(this.enemy, 1, 1);
+*/
 }
 
 Object.defineProperty(HeroGameWorld.prototype, "gameWorld", {

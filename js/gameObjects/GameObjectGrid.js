@@ -70,3 +70,4 @@ GameObjectGrid.prototype.getCell = function (gameobject) {
 GameObjectGrid.prototype.getCellPos = function (col, row) {
 	return this._gameObjects[row * this._columns + col].worldPosition;
 };
+
