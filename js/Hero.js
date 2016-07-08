@@ -46,28 +46,25 @@ Hero.prototype.handleInput = function (delta) {
 	}
 
 	//TODO: Refactor keyboard handling into better code
-	if (Keyboard.down(Keys.up)) {
-		this.row--;
+	if (Keyboard.pressed(Keys.up)) {
+		grid.getValidCellVector(this.col, this.row--);
 	}
-	if (Keyboard.down(Keys.down)) {
-		this.row++;
+	if (Keyboard.pressed(Keys.down)) {
+		grid.getValidCellVector(this.col, this.row++);
 	}
-	if (Keyboard.down(Keys.left)) {
-		this.col--;
+	if (Keyboard.pressed(Keys.left)) {
+		grid.getValidCellVector(this.col--, this.row);
 	}
-	if (Keyboard.down(Keys.right)) {
-		this.col++;
+	if (Keyboard.pressed(Keys.right)) {
+		grid.getValidCellVector(this.col++, this.row);
 	}
 
-	if (this.col < 0) {
-		this.col = 0;
-	}
-	if (this.row < 0) {
-		this.row = 0;
-	}
 
 //	newCell = new Vector2(newCol, newRow);
 //	grid.moveCellContents(this, cell, newCell);
+	var cellVector = grid.getValidCellVector(this.col, this.row);
+	this.col = cellVector.x;
+	this.row = cellVector.y;
 	this.position = grid.getCellPos(this.col, this.row);
 
 };

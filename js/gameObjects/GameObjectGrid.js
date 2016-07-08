@@ -68,6 +68,22 @@ GameObjectGrid.prototype.getCell = function (gameobject) {
 };
 
 GameObjectGrid.prototype.getCellPos = function (col, row) {
-	return this._gameObjects[row * this._columns + col].worldPosition;
+	var cellVector = this.getValidCellVector(col, row);
+	return this._gameObjects[cellVector.y * this._columns + cellVector.x].worldPosition;
 };
 
+GameObject.prototype.getValidCellVector = function (col, row) {
+	if (col < 0) {
+		col = 0;
+	}
+	if (col > this._columns-1) {
+		col = this._columns-1;
+	}
+	if (row < 0) {
+		row = 0;
+	}
+	if (row > this._rows-1) {
+		row = this._rows-1;
+	}
+	return new Vector2(col, row);
+}
