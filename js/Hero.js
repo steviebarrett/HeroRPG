@@ -4,7 +4,6 @@ function Hero(sprite, layer) {
 	SpriteGameObject.call(this, sprite, layer);
 
 	//temp
-	this.position = new Vector2(210,210);
 	this.col = 3;
 	this.row = 3;
 }
@@ -22,15 +21,6 @@ Object.defineProperty(Hero.prototype, "heroSelectRectangle",
 
 Hero.prototype.handleInput = function (delta) {
 	var grid = Game.gameWorld.find(ID.grid);
-/*
-	var cell = grid.getCell(this);
-
-	var currPos = new Vector2(this.position.x, this.position.y);
-	var newCell = null;
-	var newCol = cell.x;
-	var newRow = cell.y;
-*/
-	var newCol, newRow;
 
 	if (Touch.isTouchDevice) {
 		var rect = this.heroSelectRectangle;
@@ -47,21 +37,18 @@ Hero.prototype.handleInput = function (delta) {
 
 	//TODO: Refactor keyboard handling into better code
 	if (Keyboard.pressed(Keys.up)) {
-		grid.getValidCellVector(this.col, this.row--);
+		this.row--;
 	}
 	if (Keyboard.pressed(Keys.down)) {
-		grid.getValidCellVector(this.col, this.row++);
+		this.row++;
 	}
 	if (Keyboard.pressed(Keys.left)) {
-		grid.getValidCellVector(this.col--, this.row);
+		this.col--;
 	}
 	if (Keyboard.pressed(Keys.right)) {
-		grid.getValidCellVector(this.col++, this.row);
+		this.col++;
 	}
 
-
-//	newCell = new Vector2(newCol, newRow);
-//	grid.moveCellContents(this, cell, newCell);
 	var cellVector = grid.getValidCellVector(this.col, this.row);
 	this.col = cellVector.x;
 	this.row = cellVector.y;
