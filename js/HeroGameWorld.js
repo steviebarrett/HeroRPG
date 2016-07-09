@@ -22,6 +22,14 @@ function HeroGameWorld(layer) {
 	var hero = new Hero(sprites.hero, ID.layer_objects);
 	this.add(hero);
 
+	var enemy = new Enemy(sprites.enemy, ID.layer_objects);
+	this.add(enemy);
+
+	//test a label for later use as an action menu
+	var actionMenu = new Label("Segoe UI Mono", "20px", ID.layer_actionMenu, ID.actionMenu);
+	actionMenu.position = new Vector2(210,210);
+	actionMenu.text = "Action Menu";
+	this.add(actionMenu);
 /*
 	this.enemy = new Enemy(sprites.enemy);
 	this.enemy.scale = 0.75;

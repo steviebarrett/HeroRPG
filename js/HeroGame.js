@@ -23,9 +23,11 @@ Game.initialize = function () {
 	ID.layer_background = 1;
 	ID.layer_grid = 10;
 	ID.layer_objects = 20;
+	ID.layer_actionMenu = 40;
 
 	//define the object IDs
 	ID.grid = 1;
+	ID.actionMenu = 2;
 
 	//create the game world
 	Game.gameWorld = new HeroGameWorld();

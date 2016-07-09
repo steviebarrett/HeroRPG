@@ -1,8 +1,8 @@
 "use strict";
 
-function Enemy(sprite, position) {
-	Character.call(this, sprite, position);
+function Enemy(sprite, layer) {
+	SpriteGameObject.call(this, sprite, layer);
 }
 
-Enemy.prototype = Object.create(Character.prototype);
+Enemy.prototype = Object.create(SpriteGameObject.prototype);
 
