@@ -1,8 +1,7 @@
 "use strict";
 
-function GridSquare(layer) {
-	var spr = sprites.gridSquare;
-	SpriteGameObject.call(this, spr, layer);
+function GridSquare(sprite, layer) {
+	SpriteGameObject.call(this, sprite, layer);
 }
 
 GridSquare.prototype = Object.create(SpriteGameObject.prototype);

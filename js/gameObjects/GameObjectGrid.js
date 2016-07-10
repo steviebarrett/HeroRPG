@@ -72,7 +72,7 @@ GameObjectGrid.prototype.getCellPos = function (col, row) {
 	return this._gameObjects[cellVector.y * this._columns + cellVector.x].worldPosition;
 };
 
-GameObject.prototype.getValidCellVector = function (col, row) {
+GameObjectGrid.prototype.getValidCellVector = function (col, row) {
 	if (col < 0) {
 		col = 0;
 	}
@@ -86,4 +86,10 @@ GameObject.prototype.getValidCellVector = function (col, row) {
 		row = this._rows-1;
 	}
 	return new Vector2(col, row);
-}
+};
+
+GameObjectGrid.prototype.showRange = function (col, row, range) {
+	for (var i=1; i <= range; i++) {
+		this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid), col+i, row+i);
+	}
+};

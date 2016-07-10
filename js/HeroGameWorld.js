@@ -15,7 +15,7 @@ function HeroGameWorld(layer) {
 	this.add(grid);
 
 	for (var i = 0; i < rows * columns; i++) {
-		grid.add(new GridSquare(ID.layer_grid));
+		grid.add(new GridSquare(sprites.gridSquare, ID.layer_grid));
 	}
 
 	//our hero

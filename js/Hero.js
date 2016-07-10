@@ -3,6 +3,8 @@
 function Hero(sprite, layer) {
 	SpriteGameObject.call(this, sprite, layer);
 
+	this._range = 2;
+
 	//temp
 	this.col = 3;
 	this.row = 3;
@@ -18,6 +20,12 @@ Object.defineProperty(Hero.prototype, "heroSelectRectangle",
 		}
 	});
 
+Object.defineProperty(Hero.prototype, "range",
+	{
+		get: function () {
+			return this._range;
+		}
+	});
 
 Hero.prototype.handleInput = function (delta) {
 	var grid = Game.gameWorld.find(ID.grid);
@@ -47,6 +55,10 @@ Hero.prototype.handleInput = function (delta) {
 	}
 	if (Keyboard.pressed(Keys.right)) {
 		this.col++;
+	}
+	if (Keyboard.pressed(Keys.space)) {
+		//show range
+		grid.showRange(this.col, this.row, this._range);
 	}
 
 	var cellVector = grid.getValidCellVector(this.col, this.row);

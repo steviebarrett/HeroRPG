@@ -11,6 +11,7 @@ Game.loadAssets = function () {
 
 	sprites.background = loadSprite("background_sb.png");
 	sprites.gridSquare = loadSprite("gridSquare.png");
+	sprites.gridSquareOption = loadSprite("gridSquareOption.png");
 	sprites.hero = loadSprite("hero_sb.png");
 	sprites.enemy = loadSprite("enemy1.png");
 };
