@@ -89,7 +89,17 @@ GameObjectGrid.prototype.getValidCellVector = function (col, row) {
 };
 
 GameObjectGrid.prototype.showRange = function (col, row, range) {
-	for (var i=1; i <= range; i++) {
-		this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid), col+i, row+i);
+
+	var north = {col: col, row: row - 1};
+	var east = {col:col+1, row:row};
+	var south = {col:col, row:row+1};
+	var west = {col:col-1, row:row};
+
+	for (var i = 0; i < range; i++) {
+		this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid),
+			pos.col, pos.row - i);
 	}
+	//for (var i=1; i <= range; i++) {
+	//	this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid), col+i, row+i);
+	//}
 };
