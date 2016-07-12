@@ -90,16 +90,30 @@ GameObjectGrid.prototype.getValidCellVector = function (col, row) {
 
 GameObjectGrid.prototype.showRange = function (col, row, range) {
 
-	var north = {col: col, row: row - 1};
-	var east = {col:col+1, row:row};
-	var south = {col:col, row:row+1};
-	var west = {col:col-1, row:row};
+	var baseCellPos = new Vector2(col, row);
+	var possibleCells = new Array();
 
-	for (var i = 0; i < range; i++) {
-		this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid),
-			pos.col, pos.row - i);
+	for (var i = 0; i <= range; i++) {
+
+		possibleCells[i] = this.getPossibleCells(col, row);
+
+		for (var x = 0; x < possibleCells[i].length; x++) {
+
+			col = possibleCells[i][x].x;
+			row = possibleCells[i][x].y;
+
+			this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid),
+				col, row );
+		}
 	}
-	//for (var i=1; i <= range; i++) {
-	//	this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid), col+i, row+i);
-	//}
+};
+
+GameObjectGrid.prototype.getPossibleCells = function (col, row) {
+	var possibleCells = new Array(
+		new Vector2(col, row-1),
+		new Vector2(col, row+1),
+		new Vector2(col-1, row),
+		new Vector2(col+1, row)
+	);
+	return possibleCells;
 };
