@@ -92,20 +92,21 @@ GameObjectGrid.prototype.showRange = function (col, row, range) {
 
 	var baseCellPos = new Vector2(col, row);
 	var possibleCells = new Array();
+	possibleCells = this.getPossibleCells(col, row);
+	var i = 0;
 
-	for (var i = 0; i <= range; i++) {
+		while (i < possibleCells.length) {
+			col = possibleCells[i].x;
+			row = possibleCells[i].y;
 
-		possibleCells[i] = this.getPossibleCells(col, row);
-
-		for (var x = 0; x < possibleCells[i].length; x++) {
-
-			col = possibleCells[i][x].x;
-			row = possibleCells[i][x].y;
+			if (baseCellPos.x == col && baseCellPos.y == row) {
+				continue;
+			}
 
 			this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid),
-				col, row );
+				col, row);
+			i++;
 		}
-	}
 };
 
 GameObjectGrid.prototype.getPossibleCells = function (col, row) {
