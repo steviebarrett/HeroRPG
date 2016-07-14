@@ -91,22 +91,19 @@ GameObjectGrid.prototype.getValidCellVector = function (col, row) {
 GameObjectGrid.prototype.showRange = function (col, row, range) {
 
 	var baseCellPos = new Vector2(col, row);
-	var possibleCells = new Array();
-	possibleCells = this.getPossibleCells(col, row);
-	var i = 0;
+	var movementGrid = this.getMovementGrid(new Array(), baseCellPos, range);
 
-		while (i < possibleCells.length) {
-			col = possibleCells[i].x;
-			row = possibleCells[i].y;
+	for (var i = 0;i < movementGrid.length;i++) {
+		col = movementGrid[i].x;
+		row = movementGrid[i].y;
 
-			if (baseCellPos.x == col && baseCellPos.y == row) {
-				continue;
-			}
-
-			this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid),
-				col, row);
-			i++;
+		if (baseCellPos.x == col && baseCellPos.y == row) {
+			continue;
 		}
+
+		this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid),
+			col, row);
+	}
 };
 
 GameObjectGrid.prototype.getPossibleCells = function (col, row) {
@@ -117,4 +114,16 @@ GameObjectGrid.prototype.getPossibleCells = function (col, row) {
 		new Vector2(col+1, row)
 	);
 	return possibleCells;
+};
+
+GameObjectGrid.prototype.getMovementGrid = function (grid, cell, range) {
+	if (range === 0) {
+		return grid;
+	}
+	var possibleCells = this.getPossibleCells(cell.x, cell.y);
+	for (var i = 0;i < possibleCells.length; i++) {
+		grid.push(possibleCells[i]);
+		this.getMovementGrid(grid, possibleCells[i], range-1);
+	}
+	return grid;
 };
