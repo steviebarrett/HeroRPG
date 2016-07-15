@@ -1,7 +1,7 @@
 "use strict";
 
-function SpriteGameObject(sprite, layer) {
-	GameObject.call(this, layer);
+function SpriteGameObject(sprite, layer, id) {
+	GameObject.call(this, layer, id);
 	this.sprite = sprite;
 	this.origin = Vector2.zero;
 }

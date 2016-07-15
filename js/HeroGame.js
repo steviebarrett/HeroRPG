@@ -29,6 +29,7 @@ Game.initialize = function () {
 	//define the object IDs
 	ID.grid = 1;
 	ID.actionMenu = 2;
+	ID.gridSquare = 3;
 
 	//create the game world
 	Game.gameWorld = new HeroGameWorld();

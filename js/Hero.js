@@ -57,6 +57,7 @@ Hero.prototype.handleInput = function (delta) {
 		this.col++;
 	}
 	if (Keyboard.pressed(Keys.space)) {
+		grid.clearMovementGrid(new Array(), new Vector2(this.col, this.row), this._range);
 		//show range
 		grid.showRange(this.col, this.row, this._range);
 	}

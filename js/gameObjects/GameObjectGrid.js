@@ -7,6 +7,7 @@ function GameObjectGrid(rows, columns, layer, id) {
 	this.cellHeight = 0;
 	this._rows = rows;
 	this._columns = columns;
+	this._movementGrid = new Array();
 }
 
 GameObjectGrid.prototype = Object.create(GameObjectList.prototype);
@@ -53,7 +54,6 @@ GameObjectGrid.prototype.getAnchorPosition = function (gameobject) {
 	return new Vector2(gridPos.x * this.cellWidth, gridPos.y*this.cellHeight);
 };
 
-
 /*
  User added functions
  */
@@ -72,6 +72,7 @@ GameObjectGrid.prototype.getCellPos = function (col, row) {
 	return this._gameObjects[cellVector.y * this._columns + cellVector.x].worldPosition;
 };
 
+//Ensure a cell at col and row is within the grid
 GameObjectGrid.prototype.getValidCellVector = function (col, row) {
 	if (col < 0) {
 		col = 0;
@@ -91,17 +92,17 @@ GameObjectGrid.prototype.getValidCellVector = function (col, row) {
 GameObjectGrid.prototype.showRange = function (col, row, range) {
 
 	var baseCellPos = new Vector2(col, row);
-	var movementGrid = this.getMovementGrid(new Array(), baseCellPos, range);
+	this._movementGrid = this.getMovementGrid(new Array(), baseCellPos, range);
 
-	for (var i = 0;i < movementGrid.length;i++) {
-		col = movementGrid[i].x;
-		row = movementGrid[i].y;
+	for (var i = 0;i < this._movementGrid.length;i++) {
+		col = this._movementGrid[i].x;
+		row = this._movementGrid[i].y;
 
 		if (baseCellPos.x == col && baseCellPos.y == row) {
 			continue;
 		}
 
-		this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid),
+		this.addAt(new GridSquare(sprites.gridSquareOption, ID.layer_grid, ID.gridSquare),
 			col, row);
 	}
 };
@@ -122,8 +123,16 @@ GameObjectGrid.prototype.getMovementGrid = function (grid, cell, range) {
 	}
 	var possibleCells = this.getPossibleCells(cell.x, cell.y);
 	for (var i = 0;i < possibleCells.length; i++) {
-		grid.push(possibleCells[i]);
+		grid.push(this.getValidCellVector(possibleCells[i].x, possibleCells[i].y));
 		this.getMovementGrid(grid, possibleCells[i], range-1);
 	}
 	return grid;
+};
+
+GameObjectGrid.prototype.clearMovementGrid = function(grid, cell, range) {
+	for (var i = 0;i < this._movementGrid.length;i++) {
+		this.addAt(new GridSquare(sprites.gridSquare, ID.layer_grid, ID.gridSquare),
+			this._movementGrid[i].x, this._movementGrid[i].y
+		);
+	}
 };
