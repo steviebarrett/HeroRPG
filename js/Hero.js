@@ -4,6 +4,7 @@ function Hero(sprite, layer) {
 	SpriteGameObject.call(this, sprite, layer);
 
 	this._range = 2;
+	this._step = this._range;
 
 	//temp
 	this.col = 3;
@@ -29,6 +30,7 @@ Object.defineProperty(Hero.prototype, "range",
 
 Hero.prototype.handleInput = function (delta) {
 	var grid = Game.gameWorld.find(ID.grid);
+	var keyPressed = false;
 
 	if (Touch.isTouchDevice) {
 		var rect = this.heroSelectRectangle;
@@ -44,25 +46,38 @@ Hero.prototype.handleInput = function (delta) {
 	}
 
 	//TODO: Refactor keyboard handling into better code
-	if (Keyboard.pressed(Keys.up)) {
-		this.row--;
-	}
-	if (Keyboard.pressed(Keys.down)) {
-		this.row++;
-	}
-	if (Keyboard.pressed(Keys.left)) {
-		this.col--;
-	}
-	if (Keyboard.pressed(Keys.right)) {
-		this.col++;
-	}
-	if (Keyboard.pressed(Keys.space)) {
-		grid.clearMovementGrid(new Array(), new Vector2(this.col, this.row), this._range);
-		//show range
-		grid.showRange(this.col, this.row, this._range);
+	if (this._step) {
+		if (Keyboard.pressed(Keys.up)) {
+			this.row--;
+			keyPressed = true;
+		}
+		if (Keyboard.pressed(Keys.down)) {
+			this.row++;
+			keyPressed = true;
+		}
+		if (Keyboard.pressed(Keys.left)) {
+			this.col--;
+			keyPressed = true;
+		}
+		if (Keyboard.pressed(Keys.right)) {
+			this.col++;
+			keyPressed = true;
+		}
 	}
 
+	if (Keyboard.pressed(Keys.space)) {
+		//show range
+		grid.showRange(this.col, this.row, this._step);
+	}
+
+	if (keyPressed) {
+		grid.clearMovementGrid();
+		this._step--;
+	}
+
+	//ensures Hero stays within the grid
 	var cellVector = grid.getValidCellVector(this.col, this.row);
+
 	this.col = cellVector.x;
 	this.row = cellVector.y;
 	this.position = grid.getCellPos(this.col, this.row);

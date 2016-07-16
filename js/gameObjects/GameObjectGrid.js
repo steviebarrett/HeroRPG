@@ -129,7 +129,7 @@ GameObjectGrid.prototype.getMovementGrid = function (grid, cell, range) {
 	return grid;
 };
 
-GameObjectGrid.prototype.clearMovementGrid = function(grid, cell, range) {
+GameObjectGrid.prototype.clearMovementGrid = function() {
 	for (var i = 0;i < this._movementGrid.length;i++) {
 		this.addAt(new GridSquare(sprites.gridSquare, ID.layer_grid, ID.gridSquare),
 			this._movementGrid[i].x, this._movementGrid[i].y
