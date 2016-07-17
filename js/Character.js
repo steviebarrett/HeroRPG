@@ -1,17 +1,18 @@
 "use strict";
 
-function Character(sprite) {
-	ActiveGameObject.call(this, sprite);
-	this.sprite = sprite;
-	this.origin = Vector2.zero;
-	this.rotation = 0;
-	
+function Character(sprite, layer, id) {
+	SpriteGameObject.call(this, sprite, layer, id);
+
+	var _hitPoints = 100;
 }
 
-Character.prototype = Object.create(ActiveGameObject.prototype);
+Character.prototype = Object.create(SpriteGameObject.prototype);
 
-Character.prototype.draw = function () {
-	if (!this.visible)
-		return;
-	Canvas2D.drawImage(this.sprite, this.position, 0, 1, this.origin);
-};
+Object.defineProperty(Character.prototype, "hitPoints",
+	{
+		get: function () {
+			return this._hitPoints;
+		}
+	});
+
+

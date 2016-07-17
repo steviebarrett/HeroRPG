@@ -1,7 +1,7 @@
 "use strict";
 
-function Hero(sprite, layer) {
-	SpriteGameObject.call(this, sprite, layer);
+function Hero(sprite, layer, id) {
+	Character.call(this, sprite, layer, id);
 
 	this._range = 2;
 	this._step = this._range;
@@ -11,7 +11,7 @@ function Hero(sprite, layer) {
 	this.row = 3;
 }
 
-Hero.prototype = Object.create(SpriteGameObject.prototype);
+Hero.prototype = Object.create(Character.prototype);
 
 Object.defineProperty(Hero.prototype, "heroSelectRectangle",
 	{
